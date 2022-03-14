@@ -5,7 +5,7 @@ void main() => runApp(const MyApp());
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static const String _title = 'Bottom Nav Sample';
+  static const String _title = 'Projet Flutter';
 
   @override
   Widget build(BuildContext context) {
@@ -32,15 +32,15 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     Text(
-      'Index 0: Home',
+      'Index 0: Ajouter',
       style: optionStyle,
     ),
     Text(
-      'Index 1: Business',
+      'Index 1: Afficher',
       style: optionStyle,
     ),
     Text(
-      'Index 2: School',
+      'Index 2: Rechercher',
       style: optionStyle,
     ),
   ];
@@ -54,9 +54,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('BottomNavigationBar Sample'),
-      ),
+      // Appbar
+      // appBar: AppBar(
+      //   title: const Text('Projet Flutter'),
+      // ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
