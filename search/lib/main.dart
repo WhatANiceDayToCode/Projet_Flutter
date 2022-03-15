@@ -6,7 +6,6 @@ import 'package:search_page/search_page.dart';
 class Person {
   final String name, surname;
   final num age;
-
   Person(this.name, this.surname, this.age);
 }
 
@@ -18,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'search_page',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
       ),
       home: MyHomePage(),
     );

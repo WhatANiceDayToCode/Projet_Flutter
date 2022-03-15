@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:search_page/search_page.dart';
 
 void main() {
   runApp(const MyApp());
+}
+
+class Person {
+  final String name, surname;
+  final num age;
+  Person(this.name, this.surname, this.age);
 }
 
 const String page1 = "Ajouter";
@@ -33,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
   late List<Widget> _pages;
   late Widget _page1;
   late Widget _page2;
-  late Widget _page3;
+  // late Widget _page3;
   late int _currentIndex;
   late Widget _currentPage;
 
@@ -42,8 +49,8 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     _page1 = const Page1();
     _page2 = const Page2();
-    _page3 = Page3(changePage: _changeTab);
-    _pages = [_page1, _page2, _page3];
+    // _page3 = Page3(changePage: _changeTab);
+    _pages = [_page1, _page2];
     _currentIndex = 0;
     _currentPage = _page1;
   }
@@ -76,10 +83,10 @@ class _MyHomePageState extends State<MyHomePage> {
               label: page2,
               icon: Icon(Icons.list),
             ),
-            BottomNavigationBarItem(
-              label: page3,
-              icon: Icon(Icons.search),
-            ),
+            // BottomNavigationBarItem(
+            //   label: page3,
+            //   icon: Icon(Icons.search),
+            // ),
           ]),
       drawer: Drawer(
         child: Container(
@@ -88,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
             children: <Widget>[
               _navigationItemListTitle(page1, 0),
               _navigationItemListTitle(page2, 1),
-              _navigationItemListTitle(page3, 2),
+              // _navigationItemListTitle(page3, 2),
             ],
           ),
         ),
@@ -123,33 +130,78 @@ class Page1 extends StatelessWidget {
 
 class Page2 extends StatelessWidget {
   const Page2({Key? key}) : super(key: key);
+  static List<Person> people = [
+    Person('Mike', 'Barron', 64),
+    Person('Todd', 'Black', 30),
+    Person('Ahmad', 'Edwards', 55),
+    Person('Anthony', 'Johnson', 67),
+    Person('Annette', 'Brooks', 39),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('$page2 Page', style: Theme.of(context).textTheme.headline6),
-    );
-  }
-}
-
-class Page3 extends StatelessWidget {
-  const Page3({Key? key, required this.changePage}) : super(key: key);
-  final void Function(int) changePage;
-
-  @override
-  Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.center,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text('$page3 Page', style: Theme.of(context).textTheme.headline6),
-          ElevatedButton(
-            onPressed: () => changePage(0),
-            child: const Text('Switch to Home Page'),
-          )
-        ],
+    return Scaffold(
+      body: ListView.builder(
+        itemCount: people.length,
+        itemBuilder: (context, index) {
+          final Person person = people[index];
+          return ListTile(
+            title: Text(person.name),
+            subtitle: Text(person.surname),
+            trailing: Text('${person.age} yo'),
+          );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        tooltip: 'Search people',
+        onPressed: () => showSearch(
+          context: context,
+          delegate: SearchPage<Person>(
+            onQueryUpdate: (s) => print(s),
+            items: people,
+            searchLabel: 'Search people',
+            suggestion: Center(
+              child: Text('Filter people by name, surname or age'),
+            ),
+            failure: Center(
+              child: Text('No person found :('),
+            ),
+            filter: (person) => [
+              person.name,
+              person.surname,
+              person.age.toString(),
+            ],
+            builder: (person) => ListTile(
+              title: Text(person.name),
+              subtitle: Text(person.surname),
+              trailing: Text('${person.age} yo'),
+            ),
+          ),
+        ),
+        child: Icon(Icons.search),
       ),
     );
   }
 }
+
+// class Page3 extends StatelessWidget {
+//   const Page3({Key? key, required this.changePage}) : super(key: key);
+//   final void Function(int) changePage;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Align(
+//       alignment: Alignment.center,
+//       child: Column(
+//         mainAxisSize: MainAxisSize.min,
+//         children: [
+//           Text('$page3 Page', style: Theme.of(context).textTheme.headline6),
+//           ElevatedButton(
+//             onPressed: () => changePage(0),
+//             child: const Text('Switch to Home Page'),
+//           )
+//         ],
+//       ),
+//     );
+//   }
+// }
