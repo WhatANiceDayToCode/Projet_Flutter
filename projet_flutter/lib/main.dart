@@ -104,18 +104,18 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget _navigationItemListTitle(String title, int index) {
-    return ListTile(
-      title: Text(
-        '$title Page',
-        style: TextStyle(color: Colors.blue[400], fontSize: 22.0),
-      ),
-      onTap: () {
-        Navigator.pop(context);
-        _changeTab(index);
-      },
-    );
-  }
+  // Widget _navigationItemListTitle(String title, int index) {
+  //   return ListTile(
+  //     title: Text(
+  //       '$title Page',
+  //       style: TextStyle(color: Colors.blue[400], fontSize: 22.0),
+  //     ),
+  //     onTap: () {
+  //       Navigator.pop(context);
+  //       _changeTab(index);
+  //     },
+  //   );
+  // }
 }
 
 class Page1 extends StatelessWidget {
