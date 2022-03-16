@@ -88,18 +88,19 @@ class _MyHomePageState extends State<MyHomePage> {
             //   icon: Icon(Icons.search),
             // ),
           ]),
-      drawer: Drawer(
-        child: Container(
-          margin: const EdgeInsets.only(top: 20.0),
-          child: Column(
-            children: <Widget>[
-              _navigationItemListTitle(page1, 0),
-              _navigationItemListTitle(page2, 1),
-              // _navigationItemListTitle(page3, 2),
-            ],
-          ),
-        ),
-      ),
+      // Burger menu
+      // drawer: Drawer(
+      //   child: Container(
+      //     margin: const EdgeInsets.only(top: 20.0),
+      //     child: Column(
+      //       children: <Widget>[
+      //         _navigationItemListTitle(page1, 0),
+      //         _navigationItemListTitle(page2, 1),
+      //         // _navigationItemListTitle(page3, 2),
+      //       ],
+      //     ),
+      //   ),
+      // ),
     );
   }
 
