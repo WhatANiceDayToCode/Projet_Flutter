@@ -5,6 +5,10 @@ Dépendances à installer pour le bon fonctionnement du projet :
 flutter pub add search_page
 ```
 
+```
+flutter pub add convert
+```
+
 # Projet_Flutter
 
 A réaliser par binômes :
