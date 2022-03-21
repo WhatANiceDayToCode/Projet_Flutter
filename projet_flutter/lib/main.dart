@@ -13,7 +13,7 @@ class Person {
 
 const String page1 = "Ajouter";
 const String page2 = "Afficher";
-const String page3 = "Rechercher";
+// const String page3 = "Rechercher";
 const String title = "Projet Flutter";
 
 class MyApp extends StatelessWidget {
@@ -55,6 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
     _currentPage = _page1;
   }
 
+  // Changement de page / onglet
   void _changeTab(int index) {
     setState(() {
       _currentIndex = index;
