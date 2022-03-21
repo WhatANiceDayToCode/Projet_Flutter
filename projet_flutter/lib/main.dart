@@ -133,6 +133,7 @@ class Page1 extends StatelessWidget {
 class Page2 extends StatelessWidget {
   const Page2({Key? key}) : super(key: key);
   static List<Person> people = [
+    Person('Nom', 'Prénom', 00),
     Person('Mike', 'Barron', 64),
     Person('Todd', 'Black', 30),
     Person('Ahmad', 'Edwards', 55),
@@ -150,23 +151,23 @@ class Page2 extends StatelessWidget {
           return ListTile(
             title: Text(person.name),
             subtitle: Text(person.surname),
-            trailing: Text('${person.age} yo'),
+            trailing: Text('${person.age} ans'),
           );
         },
       ),
       floatingActionButton: FloatingActionButton(
-        tooltip: 'Search people',
+        tooltip: 'Rechercher quelqu\'un...',
         onPressed: () => showSearch(
           context: context,
           delegate: SearchPage<Person>(
             onQueryUpdate: (s) => print(s),
             items: people,
-            searchLabel: 'Search people',
+            searchLabel: 'Rechercher quelqu\'un...',
             suggestion: Center(
-              child: Text('Filter people by name, surname or age'),
+              child: Text('Rechercher par nom, prénom ou âge'),
             ),
             failure: Center(
-              child: Text('No person found :('),
+              child: Text('Aucun résultat :('),
             ),
             filter: (person) => [
               person.name,
