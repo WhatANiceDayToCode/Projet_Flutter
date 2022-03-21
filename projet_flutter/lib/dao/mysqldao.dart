@@ -1,13 +1,12 @@
 import '../infos/donnees.dart';
 import 'package:http/http.dart' as http;
 
-class MySQLDAOCategorie {
+class MySQLDAODonnees {
   static const String urlServeur =
-      "https://lpsil.iutmetz.univ-lorraine.fr/android/ws_recettes/";
+      "https://devweb.iutmetz.univ-lorraine.fr/~gall17u/";
 
-  static Future<List<Donnees>> getCategories() async {
-    final response =
-        await http.get(Uri.parse(urlServeur + 'get_categories.php'));
+  static Future<List<Donnees>> getDonnees() async {
+    final response = await http.get(Uri.parse(urlServeur + 'identite.php'));
     if (response.statusCode == 200) {
       return Donnees.listeFromJsonString(response.body);
     } else {

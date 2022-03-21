@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:projet_flutter/dao/mysqldao.dart';
+import 'package:projet_flutter/infos/donnees.dart';
 import 'package:search_page/search_page.dart';
 
 void main() {
@@ -39,7 +41,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   late List<Widget> _pages;
   late Widget _page1;
-  late Widget _page2;
+  late Page2Widget _page2;
   // late Widget _page3;
   late int _currentIndex;
   late Widget _currentPage;
@@ -48,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     _page1 = const Page1();
-    _page2 = const Page2();
+    _page2 = Page2Widget();
     // _page3 = Page3(changePage: _changeTab);
     _pages = [_page1, _page2];
     _currentIndex = 0;
@@ -130,8 +132,16 @@ class Page1 extends StatelessWidget {
   }
 }
 
-class Page2 extends StatelessWidget {
-  const Page2({Key? key}) : super(key: key);
+class Page2Widget extends StatefulWidget {
+  const Page2Widget({Key? key}) : super(key: key);
+
+  @override
+  State<Page2Widget> createState() => Page2();
+}
+
+class Page2 extends State<Page2Widget> {
+  // const Page2({Key? key}) : super(key: key);
+  // Données stockées en dûr
   static List<Person> people = [
     Person('Nom', 'Prénom', 00),
     Person('Mike', 'Barron', 64),
@@ -141,51 +151,115 @@ class Page2 extends StatelessWidget {
     Person('Annette', 'Brooks', 39),
   ];
 
+  late List<Donnees> _categories;
+
+  @override
+  void initState() {
+    _chargeCategories();
+    super.initState();
+  }
+
+  void _chargeCategories() async {
+    _categories = await MySQLDAODonnees.getDonnees();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-        itemCount: people.length,
-        itemBuilder: (context, index) {
-          final Person person = people[index];
-          return ListTile(
-            title: Text(person.name),
-            subtitle: Text(person.surname),
-            trailing: Text('${person.age} ans'),
-          );
-        },
-      ),
+      // body: ListView.builder(
+      //   itemCount: people.length,
+      //   itemBuilder: (context, index) {
+      //     final Person person = people[index];
+      //     return ListTile(
+      //       title: Text(person.name),
+      //       subtitle: Text(person.surname),
+      //       trailing: Text('${person.age} ans'),
+      //     );
+      //   },
+      // ),
+      body: _categories == null
+          ? const Center(
+              child: Text("Chargement en cours..."),
+            )
+          : ListView(
+              padding: const EdgeInsets.all(10),
+              children: <Widget>[
+                for (var idx = 0; idx < _categories.length; idx++)
+                  ListTile(
+                    title: Text(_categories[idx].nom),
+                    subtitle: Text(_categories[idx].prenom),
+                    trailing: Text(_categories[idx].id.toString()),
+                  )
+                //   ListTile(
+                //     title: Text(_categories![idx].libelle),
+                //     trailing: Icon(Icons.remove_circle,
+                //         subtitle: Text(_categories![idx].libelle),
+                //         trailing: Text(_categories![idx].libelle),
+                //         color: Theme.of(context).primaryColor),
+                //     onTap: () {
+                //       _showDialogSuppr(_categories![idx]);
+                //     },
+                // ),
+              ],
+            ),
       floatingActionButton: FloatingActionButton(
         tooltip: 'Rechercher quelqu\'un...',
         onPressed: () => showSearch(
           context: context,
-          delegate: SearchPage<Person>(
+          delegate: SearchPage<Donnees>(
+            // ignore: avoid_print
             onQueryUpdate: (s) => print(s),
-            items: people,
+            items: _categories == null ? [] : _categories,
             searchLabel: 'Rechercher quelqu\'un...',
-            suggestion: Center(
-              child: Text('Rechercher par nom, prénom ou âge'),
+            suggestion: const Center(
+              child: Text('Rechercher par nom, prénom ou numéro de téléphone'),
             ),
-            failure: Center(
+            failure: const Center(
               child: Text('Aucun résultat :('),
             ),
             filter: (person) => [
-              person.name,
-              person.surname,
-              person.age.toString(),
+              person.nom,
+              person.prenom,
+              // person.age.toString(),
             ],
             builder: (person) => ListTile(
-              title: Text(person.name),
-              subtitle: Text(person.surname),
-              trailing: Text('${person.age} yo'),
+              title: Text(person.nom),
+              subtitle: Text(person.prenom),
+              // trailing: Text('${person.age} ans'),
             ),
           ),
         ),
-        child: Icon(Icons.search),
+        child: const Icon(Icons.search),
       ),
     );
   }
 }
+//   void _showDialogSuppr(Donnees categorieSelectionnee) {
+//     showDialog<String>(
+//       context: context,
+//       builder: (BuildContext context) => AlertDialog(
+//         title: const Text('Etes-vous sûr que vous voulez supprimer ?'),
+//         content: Text(categorieSelectionnee.libelle),
+//         actions: <Widget>[
+//           TextButton(
+//             onPressed: () => Navigator.pop(context, 'Cancel'),
+//             child: const Text('ANNULER'),
+//           ),
+//           TextButton(
+//             onPressed: () {
+//               setState(() {
+//                 _categories!.remove(categorieSelectionnee);
+//               });
+//               Navigator.pop(context, 'OK');
+//             },
+//             child: const Text('OK'),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 // class Page3 extends StatelessWidget {
 //   const Page3({Key? key, required this.changePage}) : super(key: key);

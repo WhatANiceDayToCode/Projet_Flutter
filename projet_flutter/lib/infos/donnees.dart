@@ -3,19 +3,27 @@ import 'dart:convert';
 class Donnees {
   // Les attributs ne sont pas 'final' car dans un cas plus complet
   // est amené à modifier les valeurs
-  int _id;
-  String _libelle;
-  int _noOrdre;
+  final int _id;
+  String _nom;
+  String _prenom;
 
-  get libelle {
-    return _libelle;
+  get id {
+    return _id;
   }
 
-  Donnees(this._id, this._libelle, this._noOrdre);
+  get nom {
+    return _nom;
+  }
+
+  get prenom {
+    return _prenom;
+  }
+
+  Donnees(this._id, this._nom, this._prenom);
 
   @override
   String toString() {
-    return _libelle;
+    return _nom;
   }
 
   // Méthode utiisée par la DAO pour créer une liste d'instances de Donnees
@@ -26,8 +34,12 @@ class Donnees {
     var json = jsonDecode(sJSON);
 
     for (var value in json) {
-      liste.add(Donnees(int.parse(value['no_categorie']),
-          value['lib_categorie'], int.parse(value['no_ordre'])));
+      liste.add(Donnees(
+        //int.parse(value['nom']),
+        int.parse(value['id']),
+        value['nom'],
+        value['prenom'],
+      ));
     }
 
     return liste;
