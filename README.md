@@ -1,3 +1,10 @@
+# Documentation
+
+Dépendances à installer pour le bon fonctionnement du projet : 
+```
+flutter pub add search_page
+```
+
 # Projet_Flutter
 
 A réaliser par binômes :
