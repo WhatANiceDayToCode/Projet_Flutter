@@ -6,11 +6,12 @@ class MySQLDAODonnees {
       "https://devweb.iutmetz.univ-lorraine.fr/~gall17u/";
 
   static Future<List<Donnees>> getDonnees() async {
-    final response = await http.get(Uri.parse(urlServeur + 'identite.php'));
+    final response =
+        await http.get(Uri.parse(urlServeur + 'renseignement.php'));
     if (response.statusCode == 200) {
       return Donnees.listeFromJsonString(response.body);
     } else {
-      throw Exception('Impossible de charger les identités');
+      throw Exception('Impossible de charger les renseignements');
     }
   }
 }

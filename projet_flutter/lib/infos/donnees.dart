@@ -6,6 +6,7 @@ class Donnees {
   final int _id;
   String _nom;
   String _prenom;
+  String _lieu;
 
   get id {
     return _id;
@@ -19,7 +20,11 @@ class Donnees {
     return _prenom;
   }
 
-  Donnees(this._id, this._nom, this._prenom);
+  get lieu {
+    return _lieu;
+  }
+
+  Donnees(this._id, this._nom, this._prenom, this._lieu);
 
   @override
   String toString() {
@@ -39,6 +44,7 @@ class Donnees {
         int.parse(value['id']),
         value['nom'],
         value['prenom'],
+        value['lieu'],
       ));
     }
 

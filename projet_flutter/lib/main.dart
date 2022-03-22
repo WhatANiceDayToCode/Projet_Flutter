@@ -149,7 +149,7 @@ class Page2 extends State<Page2Widget> {
   //   Person('Annette', 'Brooks', 39),
   // ];
 
-  late List<Donnees> _categories;
+  late List<Donnees> _identites;
 
   @override
   void initState() {
@@ -158,7 +158,7 @@ class Page2 extends State<Page2Widget> {
   }
 
   void _chargeCategories() async {
-    _categories = await MySQLDAODonnees.getDonnees();
+    _identites = await MySQLDAODonnees.getDonnees();
     setState(() {});
   }
 
@@ -176,18 +176,18 @@ class Page2 extends State<Page2Widget> {
       //     );
       //   },
       // ),
-      body: _categories == null
+      body: _identites == null
           ? const Center(
               child: Text("Chargement en cours..."),
             )
           : ListView(
               padding: const EdgeInsets.all(10),
               children: <Widget>[
-                for (var idx = 0; idx < _categories.length; idx++)
+                for (var idx = 0; idx < _identites.length; idx++)
                   ListTile(
-                    title: Text(_categories[idx].nom),
-                    subtitle: Text(_categories[idx].prenom),
-                    trailing: Text(_categories[idx].id.toString()),
+                    title: Text(_identites[idx].nom),
+                    subtitle: Text(_identites[idx].prenom),
+                    trailing: Text(_identites[idx].id.toString()),
                   )
                 //   ListTile(
                 //     title: Text(_categories![idx].libelle),
@@ -208,7 +208,7 @@ class Page2 extends State<Page2Widget> {
           delegate: SearchPage<Donnees>(
             // ignore: avoid_print
             onQueryUpdate: (s) => print(s),
-            items: _categories == null ? [] : _categories,
+            items: _identites == null ? [] : _identites,
             searchLabel: 'Rechercher quelqu\'un...',
             suggestion: const Center(
               child: Text('Rechercher par nom, prénom ou numéro de téléphone'),
@@ -219,12 +219,12 @@ class Page2 extends State<Page2Widget> {
             filter: (person) => [
               person.nom,
               person.prenom,
-              // person.age.toString(),
+              person.id.toString(),
             ],
             builder: (person) => ListTile(
               title: Text(person.nom),
               subtitle: Text(person.prenom),
-              // trailing: Text('${person.age} ans'),
+              trailing: Text('${person.id}'),
             ),
           ),
         ),
