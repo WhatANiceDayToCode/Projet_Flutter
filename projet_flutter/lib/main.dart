@@ -42,7 +42,6 @@ class _MyHomePageState extends State<MyHomePage> {
   late List<Widget> _pages;
   late Widget _page1;
   late Page2Widget _page2;
-  // late Widget _page3;
   late int _currentIndex;
   late Widget _currentPage;
 
@@ -51,7 +50,6 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     _page1 = const Page1();
     _page2 = Page2Widget();
-    // _page3 = Page3(changePage: _changeTab);
     _pages = [_page1, _page2];
     _currentIndex = 0;
     _currentPage = _page1;
@@ -142,14 +140,14 @@ class Page2Widget extends StatefulWidget {
 class Page2 extends State<Page2Widget> {
   // const Page2({Key? key}) : super(key: key);
   // Données stockées en dûr
-  static List<Person> people = [
-    Person('Nom', 'Prénom', 00),
-    Person('Mike', 'Barron', 64),
-    Person('Todd', 'Black', 30),
-    Person('Ahmad', 'Edwards', 55),
-    Person('Anthony', 'Johnson', 67),
-    Person('Annette', 'Brooks', 39),
-  ];
+  // static List<Person> people = [
+  //   Person('Nom', 'Prénom', 00),
+  //   Person('Mike', 'Barron', 64),
+  //   Person('Todd', 'Black', 30),
+  //   Person('Ahmad', 'Edwards', 55),
+  //   Person('Anthony', 'Johnson', 67),
+  //   Person('Annette', 'Brooks', 39),
+  // ];
 
   late List<Donnees> _categories;
 
@@ -255,28 +253,6 @@ class Page2 extends State<Page2Widget> {
 //             },
 //             child: const Text('OK'),
 //           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
-// class Page3 extends StatelessWidget {
-//   const Page3({Key? key, required this.changePage}) : super(key: key);
-//   final void Function(int) changePage;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Align(
-//       alignment: Alignment.center,
-//       child: Column(
-//         mainAxisSize: MainAxisSize.min,
-//         children: [
-//           Text('$page3 Page', style: Theme.of(context).textTheme.headline6),
-//           ElevatedButton(
-//             onPressed: () => changePage(0),
-//             child: const Text('Switch to Home Page'),
-//           )
 //         ],
 //       ),
 //     );
