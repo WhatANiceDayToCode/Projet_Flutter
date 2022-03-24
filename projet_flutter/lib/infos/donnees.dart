@@ -3,13 +3,10 @@ import 'dart:convert';
 class Donnees {
   // Les attributs ne sont pas 'final' car dans un cas plus complet
   // est amené à modifier les valeurs
-  final int _id;
+  // final int _id;
   String _nom;
   String _prenom;
-
-  get id {
-    return _id;
-  }
+  String _tel_port;
 
   get nom {
     return _nom;
@@ -19,7 +16,11 @@ class Donnees {
     return _prenom;
   }
 
-  Donnees(this._id, this._nom, this._prenom);
+  get tel_port {
+    return _tel_port;
+  }
+
+  Donnees(this._nom, this._prenom, this._tel_port);
 
   @override
   String toString() {
@@ -36,9 +37,9 @@ class Donnees {
     for (var value in json) {
       liste.add(Donnees(
         //int.parse(value['nom']),
-        int.parse(value['id']),
         value['nom'],
         value['prenom'],
+        value['tel_port'],
       ));
     }
 
