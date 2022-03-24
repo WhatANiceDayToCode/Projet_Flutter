@@ -10,7 +10,7 @@ class MySQLDAODonnees {
     if (response.statusCode == 200) {
       return Donnees.listeFromJsonString(response.body);
     } else {
-      throw Exception('Impossible de charger les identités');
+      throw Exception('Impossible de charger les categories');
     }
   }
 }
