@@ -187,7 +187,7 @@ class Page2 extends State<Page2Widget> {
                   ListTile(
                     title: Text(_categories[idx].nom),
                     subtitle: Text(_categories[idx].prenom),
-                    trailing: Text(_categories[idx].tel_port),
+                    trailing: Text(_categories[idx].telPort),
                   )
                 //   ListTile(
                 //     title: Text(_categories![idx].libelle),
@@ -219,13 +219,13 @@ class Page2 extends State<Page2Widget> {
             filter: (person) => [
               person.nom,
               person.prenom,
-              person.tel_port,
+              person.telPort,
               // person.age.toString(),
             ],
             builder: (person) => ListTile(
               title: Text(person.nom),
               subtitle: Text(person.prenom),
-              trailing: Text(person.tel_port),
+              trailing: Text(person.telPort),
               // trailing: Text('${person.age} ans'),
             ),
           ),

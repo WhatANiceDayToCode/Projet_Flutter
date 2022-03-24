@@ -1,13 +1,18 @@
 import 'dart:convert';
 
+import 'dart:html';
+
 class Donnees {
   // Les attributs ne sont pas 'final' car dans un cas plus complet
   // est amené à modifier les valeurs
   // final int _id;
   String _nom;
   String _prenom;
-  String _tel_port;
+  String _date;
+  String _lieu;
+  String _telPort;
 
+// Getters
   get nom {
     return _nom;
   }
@@ -16,11 +21,25 @@ class Donnees {
     return _prenom;
   }
 
-  get tel_port {
-    return _tel_port;
+  get date {
+    return _date;
   }
 
-  Donnees(this._nom, this._prenom, this._tel_port);
+  get lieu {
+    return _lieu;
+  }
+
+  get telPort {
+    return _telPort;
+  }
+
+  Donnees(
+    this._nom,
+    this._prenom,
+    this._date,
+    this._lieu,
+    this._telPort,
+  );
 
   @override
   String toString() {
@@ -39,6 +58,8 @@ class Donnees {
         //int.parse(value['nom']),
         value['nom'],
         value['prenom'],
+        value['date'],
+        value['lieu'],
         value['tel_port'],
       ));
     }
