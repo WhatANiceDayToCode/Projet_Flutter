@@ -117,11 +117,15 @@ class Page3 extends StatelessWidget {
               },
               child: Row(
                 children: [
-                  Container(),
                   Container(
-                    margin: const EdgeInsets.only(top: 20),
+                    margin: const EdgeInsets.only(top: 20, left: 20),
                     alignment: Alignment.topLeft,
                     child: Text("Nom : " + user.nom),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 20, left: 20),
+                    alignment: Alignment.topLeft,
+                    child: Text("Prénom : " + user.prenom),
                   ),
                 ],
               )),
