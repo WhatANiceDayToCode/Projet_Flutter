@@ -15,7 +15,6 @@ class Person {
 
 const String page1 = "Ajouter";
 const String page2 = "Afficher";
-// const String page3 = "Rechercher";
 const String title = "Projet Flutter";
 
 class MyApp extends StatelessWidget {
@@ -26,9 +25,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: title,
       home: MyHomePage(title: title),
-      routes: {
-        '/afficher-infos': (context) => const Page3(),
-      },
     );
   }
 }
@@ -104,21 +100,31 @@ class Page1 extends StatelessWidget {
 }
 
 class Page3 extends StatelessWidget {
-  const Page3({Key? key}) : super(key: key);
+  Donnees user;
+  Page3(this.user, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Informations de [nom prénom]")),
+      appBar: AppBar(
+          title: Text("Informations de " + user.nom + " " + user.prenom)),
       body:
           // Gestion du bouton back de l'appBar ET du téléphone
           WillPopScope(
-        onWillPop: () async {
-          Navigator.pop(context);
-          return false;
-        },
-        child: Center(),
-      ),
+              onWillPop: () async {
+                Navigator.pop(context);
+                return false;
+              },
+              child: Row(
+                children: [
+                  Container(),
+                  Container(
+                    margin: const EdgeInsets.only(top: 20),
+                    alignment: Alignment.topLeft,
+                    child: Text("Nom : " + user.nom),
+                  ),
+                ],
+              )),
     );
   }
 }
@@ -172,7 +178,10 @@ class Page2 extends State<Page2Widget> {
                     trailing: Text(_donnees[idx].telPort),
                     onTap: () {
                       //Navigator.pop(context);
-                      Navigator.pushNamed(context, '/afficher-infos');
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Page3(_donnees[idx])));
                     },
                   )
               ],
