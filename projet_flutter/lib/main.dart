@@ -149,7 +149,7 @@ class Page2 extends State<Page2Widget> {
   //   Person('Annette', 'Brooks', 39),
   // ];
 
-  late List<Donnees> _categories;
+  late List<Donnees> _donnees;
 
   @override
   void initState() {
@@ -158,45 +158,34 @@ class Page2 extends State<Page2Widget> {
   }
 
   void _chargeCategories() async {
-    _categories = await MySQLDAODonnees.getDonnees();
+    _donnees = await MySQLDAODonnees.getDonnees();
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // body: ListView.builder(
-      //   itemCount: people.length,
-      //   itemBuilder: (context, index) {
-      //     final Person person = people[index];
-      //     return ListTile(
-      //       title: Text(person.name),
-      //       subtitle: Text(person.surname),
-      //       trailing: Text('${person.age} ans'),
-      //     );
-      //   },
-      // ),
-      body: _categories == null
+      body: _donnees == null
           ? const Center(
               child: Text("Chargement en cours..."),
             )
           : ListView(
               padding: const EdgeInsets.all(10),
               children: <Widget>[
-                for (var idx = 0; idx < _categories.length; idx++)
+                for (var idx = 0; idx < _donnees.length; idx++)
                   ListTile(
-                    title: Text(_categories[idx].nom),
-                    subtitle: Text(_categories[idx].prenom),
-                    trailing: Text(_categories[idx].telPort),
+                    title: Text(_donnees[idx].nom),
+                    subtitle: Text(_donnees[idx].prenom),
+                    trailing: Text(_donnees[idx].telPort),
                   )
                 //   ListTile(
-                //     title: Text(_categories![idx].libelle),
+                //     title: Text(_donnees![idx].libelle),
                 //     trailing: Icon(Icons.remove_circle,
-                //         subtitle: Text(_categories![idx].libelle),
-                //         trailing: Text(_categories![idx].libelle),
+                //         subtitle: Text(_donnees![idx].libelle),
+                //         trailing: Text(_donnees![idx].libelle),
                 //         color: Theme.of(context).primaryColor),
                 //     onTap: () {
-                //       _showDialogSuppr(_categories![idx]);
+                //       _showDialogSuppr(_donnees![idx]);
                 //     },
                 // ),
               ],
@@ -208,7 +197,7 @@ class Page2 extends State<Page2Widget> {
           delegate: SearchPage<Donnees>(
             // ignore: avoid_print
             onQueryUpdate: (s) => print(s),
-            items: _categories == null ? [] : _categories,
+            items: _donnees == null ? [] : _donnees,
             searchLabel: 'Rechercher quelqu\'un...',
             suggestion: const Center(
               child: Text('Rechercher par nom, prénom ou numéro de téléphone'),
@@ -220,7 +209,6 @@ class Page2 extends State<Page2Widget> {
               person.nom,
               person.prenom,
               person.telPort,
-              // person.age.toString(),
             ],
             builder: (person) => ListTile(
               title: Text(person.nom),
@@ -249,7 +237,7 @@ class Page2 extends State<Page2Widget> {
 //           TextButton(
 //             onPressed: () {
 //               setState(() {
-//                 _categories!.remove(categorieSelectionnee);
+//                 _donnees!.remove(categorieSelectionnee);
 //               });
 //               Navigator.pop(context, 'OK');
 //             },
