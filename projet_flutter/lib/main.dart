@@ -42,6 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
   late List<Widget> _pages;
   late Widget _page1;
   late Page2Widget _page2;
+  late Widget _page3;
   late int _currentIndex;
   late Widget _currentPage;
 
@@ -50,7 +51,8 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     _page1 = const Page1();
     _page2 = Page2Widget();
-    _pages = [_page1, _page2];
+    _page3 = const Page3();
+    _pages = [_page1, _page2, _page3];
     _currentIndex = 0;
     _currentPage = _page1;
   }
@@ -121,6 +123,17 @@ class _MyHomePageState extends State<MyHomePage> {
 
 class Page1 extends StatelessWidget {
   const Page1({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text('$page1 Page', style: Theme.of(context).textTheme.headline6),
+    );
+  }
+}
+
+class Page3 extends StatelessWidget {
+  const Page3({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

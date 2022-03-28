@@ -137,11 +137,11 @@ class Donnees {
         value['batiment'],
         value['ville'],
         value['cp'],
-        value['telPerso'],
-        value['telPort'],
-        value['telProf'],
+        value['tel_perso'],
+        value['tel_port'],
+        value['tel_prof'],
         value['mail'],
-        value['empPrincipal'],
+        value['emp_principal'],
       ));
     }
 
