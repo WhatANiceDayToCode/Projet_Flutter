@@ -1,11 +1,8 @@
 import 'dart:convert';
 
-import 'dart:html';
-
 class Donnees {
   // Les attributs ne sont pas 'final' car dans un cas plus complet
   // est amené à modifier les valeurs
-  // final int _id;
   String _nom;
   String _prenom;
   String _date;
