@@ -106,30 +106,101 @@ class Page3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          title: Text("Informations de " + user.nom + " " + user.prenom)),
-      body:
-          // Gestion du bouton back de l'appBar ET du téléphone
-          WillPopScope(
-              onWillPop: () async {
-                Navigator.pop(context);
-                return false;
-              },
-              child: Row(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(top: 20, left: 20),
-                    alignment: Alignment.topLeft,
-                    child: Text("Nom : " + user.nom),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(top: 20, left: 20),
-                    alignment: Alignment.topLeft,
-                    child: Text("Prénom : " + user.prenom),
-                  ),
-                ],
-              )),
-    );
+        appBar: AppBar(
+            title: Text("Informations de " + user.nom + " " + user.prenom)),
+        body:
+            // Gestion du bouton back de l'appBar ET du téléphone
+            WillPopScope(
+          onWillPop: () async {
+            Navigator.pop(context);
+            return false;
+          },
+          child: SingleChildScrollView(
+              child: Column(
+            children: [
+              Container(
+                margin: const EdgeInsets.only(top: 20, left: 20),
+                alignment: Alignment.topLeft,
+                child: Text("Nom : " + user.nom),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 20, left: 20),
+                alignment: Alignment.topLeft,
+                child: Text("Prénom : " + user.prenom),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 20, left: 20),
+                alignment: Alignment.topLeft,
+                child: Text("Date de naissance : " + user.date),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 20, left: 20),
+                alignment: Alignment.topLeft,
+                child: Text("Enseignant : " + user.enseignant),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 20, left: 20),
+                alignment: Alignment.topLeft,
+                child: Text("Matière : " + user.matiere),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 20, left: 20),
+                alignment: Alignment.topLeft,
+                child: Text("Promotion : " + user.promo),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 20, left: 20),
+                alignment: Alignment.topLeft,
+                child: Text("Licence : " + user.licence),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 20, left: 20),
+                alignment: Alignment.topLeft,
+                child: Text("Rue : " + user.rue),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 20, left: 20),
+                alignment: Alignment.topLeft,
+                child: Text("Batiment : " + user.batiment),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 20, left: 20),
+                alignment: Alignment.topLeft,
+                child: Text("Ville : " + user.ville),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 20, left: 20),
+                alignment: Alignment.topLeft,
+                child: Text("Code Postal : " + user.cp),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 20, left: 20),
+                alignment: Alignment.topLeft,
+                child: Text("Téléphone Perso : " + user.telPerso),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 20, left: 20),
+                alignment: Alignment.topLeft,
+                child: Text("Téléphone Portable : " + user.telPort),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 20, left: 20),
+                alignment: Alignment.topLeft,
+                child: Text("Teléphone Professeur : " + user.telProf),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 20, left: 20),
+                alignment: Alignment.topLeft,
+                child: Text("Mail : " + user.mail),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 20, left: 20, bottom: 20),
+                alignment: Alignment.topLeft,
+                child: Text("Emplacement Principal : " + user.empPrincipal),
+              ),
+            ],
+          )),
+        ));
   }
 }
 
