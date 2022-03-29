@@ -136,6 +136,11 @@ class Page3 extends StatelessWidget {
               Container(
                 margin: const EdgeInsets.only(top: 20, left: 20),
                 alignment: Alignment.topLeft,
+                child: Text("Lieu de naissance : " + user.lieu),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 20, left: 20),
+                alignment: Alignment.topLeft,
                 child: const Text("Adresse : ",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
