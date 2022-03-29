@@ -136,22 +136,12 @@ class Page3 extends StatelessWidget {
               Container(
                 margin: const EdgeInsets.only(top: 20, left: 20),
                 alignment: Alignment.topLeft,
-                child: Text("Enseignant : " + user.enseignant),
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 20, left: 20),
-                alignment: Alignment.topLeft,
-                child: Text("Matière : " + user.matiere),
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 20, left: 20),
-                alignment: Alignment.topLeft,
-                child: Text("Promotion : " + user.promo),
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 20, left: 20),
-                alignment: Alignment.topLeft,
-                child: Text("Licence : " + user.licence),
+                child: const Text("Adresse : ",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                        decoration: TextDecoration.underline,
+                        color: Colors.blue)),
               ),
               Container(
                 margin: const EdgeInsets.only(top: 20, left: 20),
@@ -176,6 +166,16 @@ class Page3 extends StatelessWidget {
               Container(
                 margin: const EdgeInsets.only(top: 20, left: 20),
                 alignment: Alignment.topLeft,
+                child: const Text("Renseignements complémentaires : ",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                        decoration: TextDecoration.underline,
+                        color: Colors.blue)),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 20, left: 20),
+                alignment: Alignment.topLeft,
                 child: Text("Téléphone Perso : " + user.telPerso),
               ),
               Container(
@@ -191,12 +191,43 @@ class Page3 extends StatelessWidget {
               Container(
                 margin: const EdgeInsets.only(top: 20, left: 20),
                 alignment: Alignment.topLeft,
-                child: Text("Mail : " + user.mail),
+                child: Text("Adresse Electronique : " + user.mail),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 20, left: 20),
+                alignment: Alignment.topLeft,
+                child: Text("Employeur principal (adresse complète) : " +
+                    user.empPrincipal),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 20, left: 20),
+                alignment: Alignment.topLeft,
+                child: const Text("Enseignant : ",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                        decoration: TextDecoration.underline,
+                        color: Colors.blue)),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 20, left: 20),
+                alignment: Alignment.topLeft,
+                child: Text("Enseignant : " + user.enseignant),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 20, left: 20),
+                alignment: Alignment.topLeft,
+                child: Text("Matière : " + user.matiere),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 20, left: 20),
+                alignment: Alignment.topLeft,
+                child: Text("Promotion : " + user.promo),
               ),
               Container(
                 margin: const EdgeInsets.only(top: 20, left: 20, bottom: 20),
                 alignment: Alignment.topLeft,
-                child: Text("Emplacement Principal : " + user.empPrincipal),
+                child: Text("Licence : " + user.licence),
               ),
             ],
           )),
