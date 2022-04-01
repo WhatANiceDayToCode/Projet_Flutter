@@ -318,6 +318,11 @@ class Page2 extends State<Page2Widget> {
               person.telPort,
             ],
             builder: (person) => ListTile(
+              onTap: () {
+                //Navigator.pop(context);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Page3(person)));
+              },
               title: Text(person.nom),
               subtitle: Text(person.prenom),
               trailing: Text(person.telPort),
