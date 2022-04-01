@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:projet_flutter/dao/mysqldao.dart';
 import 'package:projet_flutter/infos/donnees.dart';
@@ -47,8 +49,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    _page1 = const Page1();
-    _page2 = Page2Widget();
+    _page1 = Page1();
+    _page2 = const Page2Widget();
     _pages = [_page1, _page2];
     _currentIndex = 0;
     _currentPage = _page1;
@@ -88,15 +90,260 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
+enum TitreEnseignant { titulaire, vacataire, ater, moniteur }
+
 class Page1 extends StatelessWidget {
-  const Page1({Key? key}) : super(key: key);
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  DateTime? _selectedDate;
+
+  Page1({Key? key}) : super(key: key);
+
+  void _presentDatePicker() {
+    // showDatePicker is a pre-made funtion of Flutter
+    var context;
+    showDatePicker(
+            context: context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime(1900),
+            lastDate: DateTime.now())
+        .then((pickedDate) {
+      // Check if no date is selected
+      if (pickedDate == null) {
+        return;
+      }
+      setState(() {
+        // using state so that the UI will be rerendered when date is picked
+        _selectedDate = pickedDate;
+      });
+    });
+  }
+
+  TitreEnseignant? _character = TitreEnseignant.titulaire;
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('$page1 Page', style: Theme.of(context).textTheme.headline6),
+    return Form(
+      key: _formKey,
+      child: SingleChildScrollView(
+          child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          TextFormField(
+            decoration: const InputDecoration(
+              hintText: 'Nom',
+            ),
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Veuillez entrer le nom';
+              }
+              return null;
+            },
+          ),
+
+          TextFormField(
+            decoration: const InputDecoration(
+              hintText: 'Prénom',
+            ),
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Veuillez entrer le prénom';
+              }
+              return null;
+            },
+          ),
+
+          TextFormField(
+            decoration: const InputDecoration(
+              hintText: 'Lieu de naissance',
+            ),
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Veuillez entrer le lieu de naissance';
+              }
+              return null;
+            },
+          ),
+
+          ElevatedButton(
+              onPressed: _presentDatePicker,
+              child: const Text('Date de naissance')),
+
+          // display the selected date
+          Container(
+            padding: const EdgeInsets.all(0),
+            child: Text(
+              _selectedDate != null
+                  ? _selectedDate.toString()
+                  : 'Veuillez choisir une date',
+              style: const TextStyle(fontSize: 15),
+            ),
+          ),
+          AppBar(title: const Text("Adresse")),
+          TextFormField(
+            decoration: const InputDecoration(
+              hintText: 'Rue',
+            ),
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Veuillez entrer la rue';
+              }
+              return null;
+            },
+          ),
+
+          TextFormField(
+            decoration: const InputDecoration(
+              hintText: 'Batiment',
+            ),
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Veuillez entrer le batiment';
+              }
+              return null;
+            },
+          ),
+          TextFormField(
+            decoration: const InputDecoration(
+              hintText: 'Ville',
+            ),
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Veuillez entrer la ville';
+              }
+              return null;
+            },
+          ),
+          TextFormField(
+            decoration: const InputDecoration(
+              hintText: 'Code Postal',
+            ),
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Veuillez entrer le code postal';
+              }
+              return null;
+            },
+          ),
+          AppBar(title: const Text("Renseignements complémentaires")),
+          TextFormField(
+            decoration: const InputDecoration(
+              hintText: 'Téléphone personnel',
+            ),
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Veuillez entrer le numéro de téléphone personnel';
+              }
+              return null;
+            },
+          ),
+          TextFormField(
+            decoration: const InputDecoration(
+              hintText: 'Téléphone portable',
+            ),
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Veuillez entrer le numéro de téléphone portable';
+              }
+              return null;
+            },
+          ),
+          TextFormField(
+            decoration: const InputDecoration(
+              hintText: 'Téléphone professionnel',
+            ),
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Veuillez entrer le numéro de téléphone professionnel';
+              }
+              return null;
+            },
+          ),
+          TextFormField(
+            decoration: const InputDecoration(
+              hintText: 'Adresse électronique',
+            ),
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Veuillez entrer l\'adresse électronique';
+              }
+              return null;
+            },
+          ),
+          TextFormField(
+            decoration: const InputDecoration(
+              hintText: 'Employeur principal : adresse complète',
+            ),
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Veuillez entrer l\'adresse complète de l\'employeur principal';
+              }
+              return null;
+            },
+          ),
+          AppBar(title: const Text("Enseignant")),
+          RadioListTile<TitreEnseignant>(
+            title: const Text('Titulaire'),
+            value: TitreEnseignant.titulaire,
+            groupValue: _character,
+            onChanged: (TitreEnseignant? value) {
+              setState(() {
+                _character = value;
+              });
+            },
+          ),
+
+          RadioListTile<TitreEnseignant>(
+            title: const Text('Vacataire'),
+            value: TitreEnseignant.vacataire,
+            groupValue: _character,
+            onChanged: (TitreEnseignant? value) {
+              setState(() {
+                _character = value;
+              });
+            },
+          ),
+
+          RadioListTile<TitreEnseignant>(
+            title: const Text('ATER'),
+            value: TitreEnseignant.ater,
+            groupValue: _character,
+            onChanged: (TitreEnseignant? value) {
+              setState(() {
+                _character = value;
+              });
+            },
+          ),
+
+          RadioListTile<TitreEnseignant>(
+            title: const Text('Moniteur'),
+            value: TitreEnseignant.moniteur,
+            groupValue: _character,
+            onChanged: (TitreEnseignant? value) {
+              setState(() {
+                _character = value;
+              });
+            },
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            child: ElevatedButton(
+              onPressed: () {
+                // Validate will return true if the form is valid, or false if
+                // the form is invalid.
+                if (_formKey.currentState!.validate()) {
+                  // Process data.
+                }
+              },
+              child: const Text('VALIDER'),
+            ),
+          ),
+        ],
+      )),
     );
   }
+
+  void setState(Null Function() param0) {}
 }
 
 class Page3 extends StatelessWidget {
@@ -319,7 +566,6 @@ class Page2 extends State<Page2Widget> {
             ],
             builder: (person) => ListTile(
               onTap: () {
-                //Navigator.pop(context);
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => Page3(person)));
               },
