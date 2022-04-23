@@ -9,6 +9,11 @@ flutter pub add search_page
 flutter pub add http
 ```
 
+# Démo 
+
+https://user-images.githubusercontent.com/42692272/164912929-2e5d6bac-7583-4281-821e-10a50e72b2f9.mp4
+
+
 # Projet_Flutter
 
 A réaliser par binômes :
